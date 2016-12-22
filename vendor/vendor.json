@@ -11,8 +11,26 @@
 			"revision": ""
 		},
 		{
+			"path": "encoding",
+			"revision": ""
+		},
+		{
+			"path": "encoding/base64",
+			"revision": ""
+		},
+		{
+			"path": "errors",
+			"revision": ""
+		},
+		{
 			"path": "fmt",
 			"revision": ""
+		},
+		{
+			"checksumSHA1": "u4PBJ6ptJO2zDLizuo2OE7C8Zdc=",
+			"path": "github.com/Juev/blackfriday",
+			"revision": "b048ea894f57547d867dd6d76240937ea938b8c2",
+			"revisionTime": "2016-12-22T19:09:26Z"
 		},
 		{
 			"path": "github.com/juev/blackfriday",
@@ -63,11 +81,27 @@
 			"revision": ""
 		},
 		{
+			"path": "math",
+			"revision": ""
+		},
+		{
+			"path": "net/url",
+			"revision": ""
+		},
+		{
 			"path": "os",
 			"revision": ""
 		},
 		{
+			"path": "reflect",
+			"revision": ""
+		},
+		{
 			"path": "regexp",
+			"revision": ""
+		},
+		{
+			"path": "sort",
 			"revision": ""
 		},
 		{
@@ -79,6 +113,14 @@
 			"revision": ""
 		},
 		{
+			"path": "sync",
+			"revision": ""
+		},
+		{
+			"path": "time",
+			"revision": ""
+		},
+		{
 			"path": "unicode",
 			"revision": ""
 		},
@@ -87,5 +129,5 @@
 			"revision": ""
 		}
 	],
-	"rootPath": "github.com/juev/blackfriday"
+	"rootPath": "github.com/Juev/blackfriday"
 }

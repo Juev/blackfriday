@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"regexp"
+	"strings"
 
 	yaml "gopkg.in/yaml.v2"
 )
@@ -14,15 +16,26 @@ func Check(e error) {
 }
 
 // HandleYAMLMetaData function for parse yaml data
-func HandleYAMLMetaData(datum []byte) (interface{}, error) {
-	m := map[string]interface{}{}
+func HandleYAMLMetaData(datum []byte) (map[string]string, error) {
+	m := map[string]string{}
 	err := yaml.Unmarshal(datum, &m)
 	return m, err
 }
 
 // CheckFrontMatter function for handling FrontMatter in files
 func CheckFrontMatter(datum []byte) {
-	if datum[0] == '-' {
-		fmt.Print("We have YAML (maybe)")
+	re := regexp.MustCompile("(?s)^---\n.*\n---\n")
+	if re.Match(datum) {
+		fmt.Println("We have YAML")
+	} else {
+		fmt.Println("We dont have YAML fronmatter")
 	}
+}
+
+// SplitYaml function for spliting yaml formater and body
+func SplitYaml(datum []byte) ([]byte, []byte) {
+	re := regexp.MustCompile("(?s)^---\n.*\n---\n")
+	yaml := re.FindString(string(datum))
+	body := strings.TrimPrefix(string(datum), yaml)
+	return []byte(yaml), []byte(body)
 }

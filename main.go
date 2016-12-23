@@ -12,18 +12,19 @@ func main() {
 	input, err := ioutil.ReadFile("test.md")
 	Check(err)
 
-	CheckFrontMatter(input)
+	yaml, markdown := SplitYaml(input)
 
 	var renderer blackfriday.Renderer
 	renderer = blackfriday.HtmlRenderer(commonHTMLFlags, "", "")
 
-	yaml, err := HandleYAMLMetaData(input)
+	yamlResult, err := HandleYAMLMetaData(yaml)
 	Check(err)
 
-	fmt.Print(yaml)
-	// Need to remove yaml from file
+	fmt.Println("type: " + yamlResult["type"])
+	fmt.Println("title: " + yamlResult["title"])
+	fmt.Println()
 
-	unsafe := blackfriday.Markdown(input, renderer, extensions)
+	unsafe := blackfriday.Markdown(markdown, renderer, extensions)
 	html := bluemonday.UGCPolicy().SanitizeBytes(unsafe)
 	fmt.Print(string(html))
 }

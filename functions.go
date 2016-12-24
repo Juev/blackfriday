@@ -16,8 +16,8 @@ func Check(e error) {
 }
 
 // HandleYAMLMetaData function for parse yaml data
-func HandleYAMLMetaData(datum []byte) (map[string]string, error) {
-	m := map[string]string{}
+func HandleYAMLMetaData(datum []byte) (map[string]interface{}, error) {
+	m := map[string]interface{}{}
 	err := yaml.Unmarshal(datum, &m)
 	return m, err
 }

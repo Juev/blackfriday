@@ -23,18 +23,18 @@
 			"revision": ""
 		},
 		{
+			"path": "flag",
+			"revision": ""
+		},
+		{
 			"path": "fmt",
 			"revision": ""
 		},
 		{
-			"checksumSHA1": "u4PBJ6ptJO2zDLizuo2OE7C8Zdc=",
+			"checksumSHA1": "t2NKSAQpubsBJb6SRSo6iC0vjr4=",
 			"path": "github.com/Juev/blackfriday",
-			"revision": "b048ea894f57547d867dd6d76240937ea938b8c2",
-			"revisionTime": "2016-12-22T19:09:26Z"
-		},
-		{
-			"path": "github.com/juev/blackfriday",
-			"revision": ""
+			"revision": "524eec1a4f6f74b02a4c7279acfeeeb493e18193",
+			"revisionTime": "2016-12-23T18:47:27Z"
 		},
 		{
 			"checksumSHA1": "DWtoL5LzvhxQ6LuchRPoSbsNhp4=",

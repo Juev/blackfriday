@@ -1,15 +1,18 @@
 package main
 
 import (
+	"flag"
 	"fmt"
-	"io/ioutil"
-
 	"github.com/microcosm-cc/bluemonday"
 	"github.com/russross/blackfriday"
+	"io/ioutil"
 )
 
 func main() {
-	input, err := ioutil.ReadFile("test.md")
+	var filename = flag.String("filename", "test.md", "filename for parsing")
+	flag.Parse()
+
+	input, err := ioutil.ReadFile(*filename)
 	Check(err)
 
 	yaml, markdown := SplitYaml(input)
@@ -20,8 +23,9 @@ func main() {
 	yamlResult, err := HandleYAMLMetaData(yaml)
 	Check(err)
 
-	fmt.Println("type: " + yamlResult["type"])
-	fmt.Println("title: " + yamlResult["title"])
+	for k, v := range yamlResult {
+		fmt.Println("Key: ", k, " Value: ", v)
+	}
 	fmt.Println()
 
 	unsafe := blackfriday.Markdown(markdown, renderer, extensions)

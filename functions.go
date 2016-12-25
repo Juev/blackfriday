@@ -5,6 +5,10 @@ import (
 	"regexp"
 	"strings"
 
+	"github.com/microcosm-cc/bluemonday"
+	"github.com/russross/blackfriday"
+	"io/ioutil"
+
 	yaml "gopkg.in/yaml.v2"
 )
 
@@ -32,10 +36,29 @@ func CheckFrontMatter(datum []byte) {
 	}
 }
 
-// SplitYaml function for spliting yaml formater and body
+// SplitYaml function for spliting yaml frontmatter and body
 func SplitYaml(datum []byte) ([]byte, []byte) {
 	re := regexp.MustCompile("(?s)^---\n.*\n---\n")
 	yaml := re.FindString(string(datum))
 	body := strings.TrimPrefix(string(datum), yaml)
 	return []byte(yaml), []byte(body)
+}
+
+// ParseFile function for parsing fileName and provide yalResult and html
+func ParseFile(filename string) (map[string]interface{}, []byte) {
+	input, err := ioutil.ReadFile(filename)
+	Check(err)
+
+	yaml, markdown := SplitYaml(input)
+
+	var renderer blackfriday.Renderer
+	renderer = blackfriday.HtmlRenderer(commonHTMLFlags, "", "")
+
+	yamlResult, err := HandleYAMLMetaData(yaml)
+	Check(err)
+
+	unsafe := blackfriday.Markdown(markdown, renderer, extensions)
+	html := bluemonday.UGCPolicy().SanitizeBytes(unsafe)
+
+	return yamlResult, html
 }
